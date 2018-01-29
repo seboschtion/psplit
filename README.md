@@ -2,7 +2,7 @@
 Very basic command line tool to split texts based on patterns.
 
 ## Usage
-psplit -p "pattern" "myfile.txt"
+`psplit -p "pattern" "myfile.txt"`
 
 Currently supported patterns:
 sentence    Split text by sentences

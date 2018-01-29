@@ -11,6 +11,7 @@ void print_help(char *helper_msg);
 void split();
 void split_sentence();
 _Bool skip_char_due_w(char c, char last_c);
+_Bool char_is_sentence_terminator(char c);
 
 // p options
 enum pattern_options { SENTENCE };
@@ -73,7 +74,7 @@ void split_sentence(FILE *file) {
             }
             fputc(c, current_out_file);
         }
-        if(current_out_file != NULL && !in_a_quoted_text && c == '.') {
+        if(current_out_file != NULL && !in_a_quoted_text && char_is_sentence_terminator(c)) {
             fclose(current_out_file);
             current_out_file = NULL;
         }
@@ -89,6 +90,13 @@ _Bool skip_char_due_w(char c, char last_c) {
         return 1;
     }
     if(c == ' ' && last_c == ' ') {
+        return 1;
+    }
+    return 0;
+}
+
+_Bool char_is_sentence_terminator(char c) {
+    if(c == '.' || c == '?' || c == '!') {
         return 1;
     }
     return 0;
